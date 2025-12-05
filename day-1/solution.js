@@ -7,6 +7,7 @@ function main() {
   for (const instruction of input) {
     const direction = instruction[0];
     const distance = (parseInt(instruction.slice(1)) % 100);
+    answer += Math.floor(parseInt(instruction.slice(1)) / 100);
 
     if (direction === "L") {
       for (let i = 0; i < distance; i++) {
@@ -14,8 +15,12 @@ function main() {
           position = 99;
           continue;
         }
-
+        
         position--;
+
+        if (position === 0 && i + 1 !== distance) {
+          answer++;
+        }
       }
     }
 
@@ -23,14 +28,19 @@ function main() {
       for (let i = 0; i < distance; i++) {
         if(position === 99) {
           position = 0;
+    
+          if (i + 1 !== distance) {
+            answer++;
+          }
+
           continue;
         }
-
+        
         position++;
       }
     }
 
-    if(position === 0) {
+    if (position === 0) {
       answer++;
     }
   }
